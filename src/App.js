@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Guess from "./Components/Guess/Guess";
+import GuessLog from "./Components/GuessLog/GuessLog";
 
 function App() {
+  const [correctArray, setCorrectArray] = useState([]);
+
+  const correctGuess = (answer) => {
+    setCorrectArray(prevArray => {
+      return [answer, ...prevArray]});
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Guess addAnswer={correctGuess} />
+      <GuessLog correct={correctArray} />
     </div>
   );
 }
